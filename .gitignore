@@ -1,0 +1,12 @@
+# Python 学习产生的临时文件
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# 数据分析工具的临时文件
+.Rhistory
+.DS_Store
+
+# 编辑器临时文件
+*.swp
+*~
