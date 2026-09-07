@@ -10,3 +10,30 @@ __pycache__/
 # 编辑器临时文件
 *.swp
 *~
+
+# ===== 密钥 / API Key / 凭据：一律禁止入库 =====
+
+# 环境变量文件（常含密钥）
+.env
+.env.*
+*.env
+
+# 密钥与证书文件
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+
+# 凭据/配置类 JSON
+credentials*.json
+*credential*.json
+
+# 文件名中包含 api key / secret / token 的常见形式
+*apikey*
+*api_key*
+*api-key*
+*apikeys*
+*secret_key*
+*secret-key*
+*access_token*

@@ -1,0 +1,9 @@
+# Learning Materials 索引
+
+concept-material-generator 生成的概念学习资料目录。生成新文档前先在此查重，生成后同步更新本表。
+
+| 概念 | 文件 | 生成日期 | 一句话简介 |
+|------|------|----------|------------|
+| Agent Skill | Agent-Skill.md | 2026-09-06 | Anthropic 的智能体扩展格式：文件夹 + SKILL.md，渐进式披露按需加载 |
+| 大模型上下文 | 大模型上下文.md | 2026-09-06 | 模型生成时可见的全部内容：有限、共享、位置敏感的"工作记忆" |
+| Agent Skill（v2 深入版） | Agent-Skill-v2.md | 2026-09-06 | v1 讲"是什么"，v2 讲"怎么写好"：description 触发、单一工作流、评测驱动迭代 |
