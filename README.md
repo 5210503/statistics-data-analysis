@@ -31,7 +31,7 @@
 |------|------|----------|------------|
 | Agent Skill | `learning-materials/Agent-Skill.md` | 2026-09-06 | Anthropic 的智能体扩展格式：文件夹 + SKILL.md，渐进式披露按需加载 |
 | 大模型上下文 | `learning-materials/大模型上下文.md` | 2026-09-06 | 模型生成时可见的全部内容：有限、共享、位置敏感的"工作记忆" |
-| Skill（v2 深入版） | `learning-materials/Skill-v2.md` | 2026-09-06 | v1 讲"是什么"，v2 讲"怎么写好"：description 触发、单一工作流、评测驱动迭代 |
+| Skill | `learning-materials/Skill.md` | 2026-09-09 | 为 Agent 封装的可复用任务能力模板：元数据 + 规则 + 流程 + 自检，按需注入上下文 |
 
 另有概念关系总结文档（非 Skill 生成）：根目录 `concept-relationship.md`（Agent、大模型上下文、Skill 三者关系，2026-09-09 更新，与三份学习资料交叉引用）。
 
