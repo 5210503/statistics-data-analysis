@@ -3,6 +3,27 @@ __pycache__/
 *.pyc
 .ipynb_checkpoints/
 
+# ===== LLM Wiki =====
+
+# 私人笔记：可让 AI 读取，但永不入库
+private/
+
+# 知识库体检 / lint / 图谱 报告的临时产物
+wiki/health-report.md
+wiki/lint-report.md
+graph/graph-report.md
+
+# 自动化脚本的日志
+automation.log
+automation-cron.log
+daemon.stdout.log
+daemon.stderr.log
+daily-sync.sh
+
+# Obsidian 工作区缓存（笔记本身仍入库）
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
 # 数据分析工具的临时文件
 .Rhistory
 .DS_Store

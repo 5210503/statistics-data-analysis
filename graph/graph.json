@@ -1,0 +1,725 @@
+{
+  "generated": "2026-09-10",
+  "stats": {
+    "pages": 17,
+    "extracted_edges": 66,
+    "inferred_edges": 26,
+    "communities": 2
+  },
+  "nodes": [
+    {
+      "id": "AgentSkill",
+      "label": "AgentSkill",
+      "title": "Agent Skill",
+      "type": "concept",
+      "group": 0,
+      "color": "#4285f4",
+      "degree": 14,
+      "file": "wiki/concepts/AgentSkill.md"
+    },
+    {
+      "id": "ContextEngineering",
+      "label": "ContextEngineering",
+      "title": "上下文工程（Context Engineering）",
+      "type": "concept",
+      "group": 0,
+      "color": "#4285f4",
+      "degree": 13,
+      "file": "wiki/concepts/ContextEngineering.md"
+    },
+    {
+      "id": "DescriptiveStatistics",
+      "label": "DescriptiveStatistics",
+      "title": "描述性统计（Descriptive Statistics）",
+      "type": "concept",
+      "group": 1,
+      "color": "#ea4335",
+      "degree": 2,
+      "file": "wiki/concepts/DescriptiveStatistics.md"
+    },
+    {
+      "id": "LLMContext",
+      "label": "LLMContext",
+      "title": "大模型上下文（LLM Context）",
+      "type": "concept",
+      "group": 0,
+      "color": "#4285f4",
+      "degree": 11,
+      "file": "wiki/concepts/LLMContext.md"
+    },
+    {
+      "id": "MCP",
+      "label": "MCP",
+      "title": "MCP（Model Context Protocol）",
+      "type": "concept",
+      "group": 0,
+      "color": "#4285f4",
+      "degree": 9,
+      "file": "wiki/concepts/MCP.md"
+    },
+    {
+      "id": "ProgressiveDisclosure",
+      "label": "ProgressiveDisclosure",
+      "title": "渐进式披露（Progressive Disclosure）",
+      "type": "concept",
+      "group": 0,
+      "color": "#4285f4",
+      "degree": 14,
+      "file": "wiki/concepts/ProgressiveDisclosure.md"
+    },
+    {
+      "id": "Skill",
+      "label": "Skill",
+      "title": "Skill",
+      "type": "concept",
+      "group": 0,
+      "color": "#4285f4",
+      "degree": 14,
+      "file": "wiki/concepts/Skill.md"
+    },
+    {
+      "id": "Anthropic",
+      "label": "Anthropic",
+      "title": "Anthropic",
+      "type": "entity",
+      "group": 0,
+      "color": "#4285f4",
+      "degree": 11,
+      "file": "wiki/entities/Anthropic.md"
+    },
+    {
+      "id": "ConceptMaterialGenerator",
+      "label": "ConceptMaterialGenerator",
+      "title": "concept-material-generator",
+      "type": "entity",
+      "group": 0,
+      "color": "#4285f4",
+      "degree": 11,
+      "file": "wiki/entities/ConceptMaterialGenerator.md"
+    },
+    {
+      "id": "WorkBuddy",
+      "label": "WorkBuddy",
+      "title": "WorkBuddy",
+      "type": "entity",
+      "group": 0,
+      "color": "#4285f4",
+      "degree": 12,
+      "file": "wiki/entities/WorkBuddy.md"
+    },
+    {
+      "id": "overview",
+      "label": "overview",
+      "title": "overview",
+      "type": "overview",
+      "group": 0,
+      "color": "#4285f4",
+      "degree": 12,
+      "file": "wiki/overview.md"
+    },
+    {
+      "id": "agent-skill-material",
+      "label": "agent-skill-material",
+      "title": "Agent Skill（Anthropic Agent Skills 格式）",
+      "type": "source",
+      "group": 0,
+      "color": "#4285f4",
+      "degree": 12,
+      "file": "wiki/sources/agent-skill-material.md"
+    },
+    {
+      "id": "concept-relationship-summary",
+      "label": "concept-relationship-summary",
+      "title": "Agent / 大模型上下文 / Skill 三者关系",
+      "type": "source",
+      "group": 0,
+      "color": "#4285f4",
+      "degree": 13,
+      "file": "wiki/sources/concept-relationship-summary.md"
+    },
+    {
+      "id": "descriptive-statistics-01",
+      "label": "descriptive-statistics-01",
+      "title": "第 01 讲 · 描述性统计",
+      "type": "source",
+      "group": 1,
+      "color": "#ea4335",
+      "degree": 1,
+      "file": "wiki/sources/descriptive-statistics-01.md"
+    },
+    {
+      "id": "llm-context-material",
+      "label": "llm-context-material",
+      "title": "大模型上下文（Context）",
+      "type": "source",
+      "group": 0,
+      "color": "#4285f4",
+      "degree": 11,
+      "file": "wiki/sources/llm-context-material.md"
+    },
+    {
+      "id": "skill-material",
+      "label": "skill-material",
+      "title": "Skill（通用概念：可复用任务能力模板）",
+      "type": "source",
+      "group": 0,
+      "color": "#4285f4",
+      "degree": 10,
+      "file": "wiki/sources/skill-material.md"
+    },
+    {
+      "id": "agent-context-skill-relationship",
+      "label": "agent-context-skill-relationship",
+      "title": "Agent、上下文与 Skill 的三层关系",
+      "type": "synthesis",
+      "group": 0,
+      "color": "#4285f4",
+      "degree": 14,
+      "file": "wiki/syntheses/agent-context-skill-relationship.md"
+    }
+  ],
+  "edges": [
+    {
+      "source": "AgentSkill",
+      "target": "Skill",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "AgentSkill",
+      "target": "ProgressiveDisclosure",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "AgentSkill",
+      "target": "MCP",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "AgentSkill",
+      "target": "agent-skill-material",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "AgentSkill",
+      "target": "skill-material",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "AgentSkill",
+      "target": "concept-relationship-summary",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "AgentSkill",
+      "target": "LLMContext",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "AgentSkill",
+      "target": "Anthropic",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "AgentSkill",
+      "target": "WorkBuddy",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "ContextEngineering",
+      "target": "LLMContext",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "ContextEngineering",
+      "target": "ProgressiveDisclosure",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "ContextEngineering",
+      "target": "llm-context-material",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "ContextEngineering",
+      "target": "concept-relationship-summary",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "ContextEngineering",
+      "target": "Skill",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "AgentSkill",
+      "target": "ContextEngineering",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "DescriptiveStatistics",
+      "target": "descriptive-statistics-01",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "LLMContext",
+      "target": "llm-context-material",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "LLMContext",
+      "target": "concept-relationship-summary",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "LLMContext",
+      "target": "ProgressiveDisclosure",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "LLMContext",
+      "target": "Skill",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "LLMContext",
+      "target": "WorkBuddy",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "MCP",
+      "target": "Skill",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "MCP",
+      "target": "agent-skill-material",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "Anthropic",
+      "target": "MCP",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "ProgressiveDisclosure",
+      "target": "Skill",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "ProgressiveDisclosure",
+      "target": "agent-skill-material",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "ProgressiveDisclosure",
+      "target": "skill-material",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "ProgressiveDisclosure",
+      "target": "llm-context-material",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "Skill",
+      "target": "skill-material",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "Skill",
+      "target": "agent-skill-material",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "Skill",
+      "target": "concept-relationship-summary",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "ConceptMaterialGenerator",
+      "target": "Skill",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "Skill",
+      "target": "WorkBuddy",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "Anthropic",
+      "target": "ProgressiveDisclosure",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "Anthropic",
+      "target": "ContextEngineering",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "Anthropic",
+      "target": "Skill",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "Anthropic",
+      "target": "llm-context-material",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "AgentSkill",
+      "target": "ConceptMaterialGenerator",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "ConceptMaterialGenerator",
+      "target": "LLMContext",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "ConceptMaterialGenerator",
+      "target": "WorkBuddy",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "ConceptMaterialGenerator",
+      "target": "ProgressiveDisclosure",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "ProgressiveDisclosure",
+      "target": "WorkBuddy",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "LLMContext",
+      "target": "overview",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "ContextEngineering",
+      "target": "overview",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "Skill",
+      "target": "overview",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "AgentSkill",
+      "target": "overview",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "ProgressiveDisclosure",
+      "target": "overview",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "MCP",
+      "target": "overview",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "agent-context-skill-relationship",
+      "target": "overview",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "DescriptiveStatistics",
+      "target": "overview",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "Anthropic",
+      "target": "agent-skill-material",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "agent-skill-material",
+      "target": "skill-material",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "agent-context-skill-relationship",
+      "target": "concept-relationship-summary",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "ProgressiveDisclosure",
+      "target": "concept-relationship-summary",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "Skill",
+      "target": "llm-context-material",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "AgentSkill",
+      "target": "llm-context-material",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "concept-relationship-summary",
+      "target": "llm-context-material",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "LLMContext",
+      "target": "skill-material",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "ConceptMaterialGenerator",
+      "target": "skill-material",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "WorkBuddy",
+      "target": "skill-material",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "LLMContext",
+      "target": "agent-context-skill-relationship",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "Skill",
+      "target": "agent-context-skill-relationship",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "ContextEngineering",
+      "target": "agent-context-skill-relationship",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "ProgressiveDisclosure",
+      "target": "agent-context-skill-relationship",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "ConceptMaterialGenerator",
+      "target": "agent-context-skill-relationship",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "AgentSkill",
+      "target": "agent-context-skill-relationship",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "ContextEngineering",
+      "target": "MCP",
+      "kind": "INFERRED",
+      "confidence": 0.28
+    },
+    {
+      "source": "ConceptMaterialGenerator",
+      "target": "ContextEngineering",
+      "kind": "INFERRED",
+      "confidence": 0.33
+    },
+    {
+      "source": "ContextEngineering",
+      "target": "WorkBuddy",
+      "kind": "INFERRED",
+      "confidence": 0.26
+    },
+    {
+      "source": "ContextEngineering",
+      "target": "agent-skill-material",
+      "kind": "INFERRED",
+      "confidence": 0.27
+    },
+    {
+      "source": "MCP",
+      "target": "ProgressiveDisclosure",
+      "kind": "INFERRED",
+      "confidence": 0.28
+    },
+    {
+      "source": "MCP",
+      "target": "skill-material",
+      "kind": "INFERRED",
+      "confidence": 0.26
+    },
+    {
+      "source": "MCP",
+      "target": "agent-context-skill-relationship",
+      "kind": "INFERRED",
+      "confidence": 0.27
+    },
+    {
+      "source": "Anthropic",
+      "target": "WorkBuddy",
+      "kind": "INFERRED",
+      "confidence": 0.26
+    },
+    {
+      "source": "Anthropic",
+      "target": "overview",
+      "kind": "INFERRED",
+      "confidence": 0.3
+    },
+    {
+      "source": "Anthropic",
+      "target": "concept-relationship-summary",
+      "kind": "INFERRED",
+      "confidence": 0.33
+    },
+    {
+      "source": "Anthropic",
+      "target": "agent-context-skill-relationship",
+      "kind": "INFERRED",
+      "confidence": 0.3
+    },
+    {
+      "source": "ConceptMaterialGenerator",
+      "target": "overview",
+      "kind": "INFERRED",
+      "confidence": 0.3
+    },
+    {
+      "source": "ConceptMaterialGenerator",
+      "target": "agent-skill-material",
+      "kind": "INFERRED",
+      "confidence": 0.35
+    },
+    {
+      "source": "ConceptMaterialGenerator",
+      "target": "concept-relationship-summary",
+      "kind": "INFERRED",
+      "confidence": 0.39
+    },
+    {
+      "source": "WorkBuddy",
+      "target": "agent-skill-material",
+      "kind": "INFERRED",
+      "confidence": 0.36
+    },
+    {
+      "source": "WorkBuddy",
+      "target": "concept-relationship-summary",
+      "kind": "INFERRED",
+      "confidence": 0.31
+    },
+    {
+      "source": "WorkBuddy",
+      "target": "llm-context-material",
+      "kind": "INFERRED",
+      "confidence": 0.27
+    },
+    {
+      "source": "WorkBuddy",
+      "target": "agent-context-skill-relationship",
+      "kind": "INFERRED",
+      "confidence": 0.42
+    },
+    {
+      "source": "concept-relationship-summary",
+      "target": "overview",
+      "kind": "INFERRED",
+      "confidence": 0.4
+    },
+    {
+      "source": "llm-context-material",
+      "target": "overview",
+      "kind": "INFERRED",
+      "confidence": 0.3
+    },
+    {
+      "source": "agent-skill-material",
+      "target": "concept-relationship-summary",
+      "kind": "INFERRED",
+      "confidence": 0.34
+    },
+    {
+      "source": "agent-skill-material",
+      "target": "llm-context-material",
+      "kind": "INFERRED",
+      "confidence": 0.27
+    },
+    {
+      "source": "agent-context-skill-relationship",
+      "target": "agent-skill-material",
+      "kind": "INFERRED",
+      "confidence": 0.32
+    },
+    {
+      "source": "concept-relationship-summary",
+      "target": "skill-material",
+      "kind": "INFERRED",
+      "confidence": 0.4
+    },
+    {
+      "source": "agent-context-skill-relationship",
+      "target": "llm-context-material",
+      "kind": "INFERRED",
+      "confidence": 0.46
+    },
+    {
+      "source": "agent-context-skill-relationship",
+      "target": "skill-material",
+      "kind": "INFERRED",
+      "confidence": 0.46
+    }
+  ],
+  "communities": [
+    {
+      "id": 0,
+      "size": 15,
+      "members": [
+        "AgentSkill",
+        "ContextEngineering",
+        "LLMContext",
+        "MCP",
+        "ProgressiveDisclosure",
+        "Skill",
+        "Anthropic",
+        "ConceptMaterialGenerator",
+        "WorkBuddy",
+        "overview",
+        "agent-skill-material",
+        "concept-relationship-summary",
+        "llm-context-material",
+        "skill-material",
+        "agent-context-skill-relationship"
+      ],
+      "color": "#4285f4"
+    },
+    {
+      "id": 1,
+      "size": 2,
+      "members": [
+        "DescriptiveStatistics",
+        "descriptive-statistics-01"
+      ],
+      "color": "#ea4335"
+    }
+  ],
+  "top_nodes": [
+    {
+      "id": "AgentSkill",
+      "degree": 14
+    },
+    {
+      "id": "ProgressiveDisclosure",
+      "degree": 14
+    },
+    {
+      "id": "Skill",
+      "degree": 14
+    },
+    {
+      "id": "agent-context-skill-relationship",
+      "degree": 14
+    },
+    {
+      "id": "ContextEngineering",
+      "degree": 13
+    }
+  ],
+  "broken_links": []
+}

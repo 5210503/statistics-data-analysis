@@ -1,0 +1,37 @@
+[project]
+name = "llm-wiki-personal"
+version = "1.0.0"
+description = "LLM Wiki 个人知识库：raw/ 原始资料 → wiki/ 结构化页面 → graph/ 知识图谱，由 AI Agent 自我维护"
+readme = "README.md"
+requires-python = ">=3.10,<3.15"
+license = { file = "LICENSE" }
+dependencies = []          # 核心工具为纯标准库，无需第三方依赖
+
+[project.optional-dependencies]
+# 多格式 ingest（PDF/DOCX/PPTX/… → markdown）
+convert = [
+    "markitdown>=0.1.0",
+]
+# arXiv / 复杂 PDF 高保真转换
+pdf = [
+    "arxiv2markdown>=1.0.0",
+    "pymupdf4llm>=0.0.10",
+]
+# 上游 llm-wiki-agent 的 LLM 版工具所需（本仓库未移植，按需安装）
+# ⚠️ litellm 1.82.7–1.82.8 曾被投毒，必须钉到安全版本
+llm-tools = [
+    "litellm~=1.83.10",
+    "networkx~=3.6.1",
+]
+
+[project.scripts]
+wiki-health = "tools.health:main"
+wiki-lint = "tools.lint:main"
+wiki-graph = "tools.build_graph:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["tools"]

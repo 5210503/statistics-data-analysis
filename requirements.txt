@@ -1,0 +1,23 @@
+# ============================================================
+# 本仓库的 tools/ 是【纯标准库】实现 —— 运行 health.py / lint.py /
+# build_graph.py 不需要安装任何第三方包，也不需要 API Key。
+# 因此本文件默认【不含必需的依赖】。
+# ============================================================
+#
+# 若你希望启用「多格式 ingest」（把 PDF/DOCX/PPTX 等自动转成 markdown）：
+# markitdown>=0.1.0
+#
+# 若你希望启用 arXiv 论文的高保真转换：
+# arxiv2markdown>=1.0.0
+# marker-pdf>=1.0.0        # 复杂多栏 PDF
+# pymupdf4llm>=0.0.10      # 快速 PDF 抽取
+#
+# ------------------------------------------------------------
+# 可选：上游 llm-wiki-agent 的 LLM 版工具（ingest / query / lint 脚本）
+# 本仓库未移植这些脚本，语义部分改由 Agent 本身完成。若你确实需要：
+#
+# ⚠️ 供应链告警：litellm 1.82.7–1.82.8 于 2026 年 3 月被投毒，务必钉到安全版本。
+#    参见：https://github.com/SamurAIGPT/llm-wiki-agent/issues/41
+#
+# litellm~=1.83.10
+# networkx~=3.6.1

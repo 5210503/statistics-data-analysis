@@ -10,3 +10,14 @@
 - **认证**：Windows 凭据管理器已存有效 PAT（host=gh-proxy.com，用户名 5210503，2026-09-07 更新）。WorkBuddy 环境里 GCM 无法弹交互登录窗，凭据失效时需用户提供 PAT，用 `https://用户名:token@gh-proxy.com/...` 一次性推送，再 `git credential approve` 存回凭据管理器。
 - **已知怪癖**：git 在本机更新 `.git/refs/remotes/origin/*` 跟踪引用会静默失败（update-ref 返回成功但值不变）；推送/拉取成功后若 `git status` 仍显示 ahead，手动创建 `.git/refs/remotes/origin/<分支>` 文件写入远程最新 commit hash 即可。
 - **.workbuddy/ 已入库**：用户 2026-09-07 明确选择连 同 .workbuddy/（记忆+skill）一起推送到远程，后续推送保持包含。
+
+## LLM Wiki 知识库（2026-09-10 起）
+
+- 仓库已是 **LLM Wiki 范式**：`raw/`（原始资料，只读）→ `wiki/`（AI 维护：index / log / overview + sources / entities / concepts / syntheses）→ `graph/`（图谱产物）。规范见根目录 `CLAUDE.md`，`AGENTS.md` / `GEMINI.md` 是其入口。
+- **维护触发**：WorkBuddy 侧靠项目级 Skill `.workbuddy/skills/llm-wiki/SKILL.md` 自动加载；Claude Code 侧靠 `.claude/commands/wiki-*.md`。操作词：`ingest` / `query` / `health` / `lint` / `build graph`。
+- **工具**：`python tools/health.py`（结构体检，零 LLM 调用，正常应为 0 问题，可加 `--json` / `--save`）、`python tools/lint.py`（内容体检·确定性：孤立页/断链/稀疏页/缺失实体页启发式 + 图谱感知：Hub存根/脆弱桥/孤立社区/幻影枢纽）、`python tools/build_graph.py`（重建 graph.json + 自包含 graph.html，`--report`/`--save` 出图谱健康报告）。纯标准库，无需 API Key。
+- **与上游的关系（重要）**：结构/Schema/工作流参考 `SamurAIGPT/llm-wiki-agent`（MIT，3504★），但**工具层是重写而非移植**（上游依赖 networkx+litellm、需 API Key）。差异清单见 `tools/README.md`。schema 三件套 `CLAUDE.md`/`AGENTS.md`/`GEMINI.md` 是**完整镜像**（等价内容、不同入口），不要改成薄指针。
+- **硬约束（改动知识库时必须遵守）**：① `raw/` 只读，永不修改删除；② 禁止编造来源与链接，不确定就写「待核实」；③ 新页面必须带 YAML frontmatter + 登记 `wiki/index.md` + 追加 `wiki/log.md`；④ wikilink 必须指向真实存在的页面。
+- **命名约定**：概念/实体页 TitleCase（`Skill.md`、`Anthropic.md`），来源页 kebab-case 且带语义后缀（`skill-material.md`），避免 Obsidian 大小写不敏感造成的同名冲突。
+- **素材区**：`learning-materials/`（concept-material-generator 输出）、`notes/`、`exercises/`、`data/` 不属于三层架构；其内容需先复制进 `raw/` 再 ingest。
+- 已知问题：Markdown 表格内不要用转义的 wikilink（`[[X\|Y]]` 会断链）。
