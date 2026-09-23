@@ -172,6 +172,99 @@ def build_report(data: dict) -> str:
     return "\n".join(L)
 
 
+_JS_BEFORE_REGEX = set("=(,:[!&|?;{}+-*%<>~^")
+_JS_KEYWORDS_BEFORE_REGEX = ("return", "typeof", "instanceof", "in", "of", "new",
+                             "delete", "void", "case", "do", "else", "yield", "await")
+
+
+def js_balance_errors(js: str):
+    """极简 JS 扫描器：跳过字符串 / 模板串 / 注释 / 正则字面量后，
+    检查 () [] {} 是否配平。纯标准库，用来兜住“模板手误产出一个打不开的页面”。
+
+    局限：这不是真正的语法分析（不做 ASI、不解析 JSX），只能挡住括号类手误；
+    但正是这类手误会让浏览器整段脚本解析失败、页面一片空白，且肉眼极难发现。
+    """
+    stack, errors = [], []
+    i, n = 0, len(js)
+    prev, prev_word = "", ""
+
+    while i < n:
+        c = js[i]
+
+        if c == "/" and js[i + 1:i + 2] == "/":          # 行注释
+            j = js.find("\n", i)
+            i = n if j < 0 else j
+            continue
+        if c == "/" and js[i + 1:i + 2] == "*":          # 块注释
+            j = js.find("*/", i + 2)
+            if j < 0:
+                return ["块注释 /* 未闭合"]
+            i = j + 2
+            continue
+
+        # / 处在“期待操作数”的位置 → 正则字面量（否则是除号）
+        if c == "/" and (prev in _JS_BEFORE_REGEX or prev_word in _JS_KEYWORDS_BEFORE_REGEX):
+            i += 1
+            in_class = False
+            while i < n and js[i] != "\n":
+                ch = js[i]
+                if ch == "\\":
+                    i += 2
+                    continue
+                if ch == "[":
+                    in_class = True
+                elif ch == "]" and in_class:
+                    in_class = False
+                elif ch == "/" and not in_class:
+                    break
+                i += 1
+            if i >= n or js[i] == "\n":
+                return ["正则字面量未闭合"]
+            i += 1
+            while i < n and (js[i].isalpha() or js[i].isdigit()):
+                i += 1
+            prev, prev_word = "/", ""
+            continue
+
+        if c in "'\"`":                                  # 字符串 / 模板串
+            quote, i = c, i + 1
+            while i < n:
+                ch = js[i]
+                if ch == "\\":
+                    i += 2
+                    continue
+                if ch == quote:
+                    break
+                if quote == "`" and ch == "$" and js[i + 1:i + 2] == "{":
+                    depth, i = 1, i + 2                # 插值 ${...}
+                    while i < n and depth:
+                        depth += (js[i] == "{") - (js[i] == "}")
+                        i += 1
+                    continue
+                i += 1
+            if i >= n:
+                return [f"字符串 {quote} 未闭合"]
+            i += 1
+            prev, prev_word = quote, ""
+            continue
+
+        if c in "([{":
+            stack.append(c)
+        elif c in ")]}":
+            if not stack:
+                errors.append(f"多余的 '{c}'")
+            elif "([{".index(stack.pop()) != ")]}".index(c):
+                errors.append(f"'{c}' 与前文括号不匹配")
+        if not c.isspace():
+            prev_word = prev_word + c if (c.isalnum() or c in "_$") else ""
+            prev = c
+        i += 1
+
+    if stack:
+        errors.append("未闭合的 " + " ".join(f"'{o}'" for o in stack))
+    return errors
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description="LLM Wiki 知识图谱构建")
     ap.add_argument("--report", action="store_true", help="额外生成图谱健康报告")
@@ -266,12 +359,24 @@ def main(argv=None):
     }
 
     GRAPH_DIR.mkdir(parents=True, exist_ok=True)
+    # newline="\n"：生成物跨平台逐字节一致（否则 Windows 上会写成 CRLF）
     (GRAPH_DIR / "graph.json").write_text(
-        json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+        json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
 
     payload = json.dumps(data, ensure_ascii=False).replace("<", "\\u003c")
     html = HTML_TEMPLATE.replace("/*__GRAPH_DATA__*/", payload)
-    (GRAPH_DIR / "graph.html").write_text(html, encoding="utf-8")
+
+    # 落盘前自检：脚本必须语法健全。一处括号手误会让浏览器整段脚本解析失败
+    # → 页面白屏，而文件本身看上去完全正常，最难排查。
+    script = "".join(re.findall(r"<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>", html, re.S))
+    js_errors = js_balance_errors(script)
+    if js_errors:
+        print("✗ 生成的脚本未通过括号自检，已放弃写出 graph.html：")
+        for e in js_errors:
+            print(f"  - {e}")
+        return 1
+
+    (GRAPH_DIR / "graph.html").write_text(html, encoding="utf-8", newline="\n")
 
     # 控制台摘要
     s = data["stats"]
@@ -291,7 +396,7 @@ def main(argv=None):
         report = build_report(data)
         if args.save:
             out = GRAPH_DIR / "graph-report.md"
-            out.write_text(report, encoding="utf-8")
+            out.write_text(report, encoding="utf-8", newline="\n")
             print(f"已写入 {out.relative_to(ROOT)}")
         if args.report:
             print("\n" + report)
@@ -364,7 +469,7 @@ const ctx = canvas.getContext('2d');
 const wrap = document.getElementById('canvas-wrap');
 let W = 0, H = 0, DPR = 1;
 
-const nodes = GRAPH.nodes.map((n, i) => Object.assign({}, n, { x: 0, y: 0, vx: 0, vy: 0));
+const nodes = GRAPH.nodes.map(n => Object.assign({}, n, { x: 0, y: 0, vx: 0, vy: 0 }));
 const byId = new Map(nodes.map(n => [n.id, n]));
 const links = GRAPH.edges.filter(e => byId.has(e.source) && byId.has(e.target))
                          .map(e => Object.assign({}, e));

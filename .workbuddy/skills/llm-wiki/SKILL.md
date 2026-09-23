@@ -29,6 +29,7 @@ agent_created: true
 
 > ⚠️ **收尾三件套不能省**：`python tools/health.py`（断链 / 索引 / 日志）→ `python tools/lint.py`（内容）→ `python tools/build_graph.py`。
 > **尤其别忘重跑图谱**——否则 `graph/` 会停留在旧状态，与实际 wiki 不一致。
+> 三者退出码已分级，可安全用 `&&` 串联：`0` = 无问题，`1` = 有问题。**只有真问题才让 `lint` 退出 1**；`💡` 类（缺失实体页启发式 / 脆弱桥 / 孤立社区）属提示，不计入退出码——**不要为了消掉它而硬凑跨簇链接**。
 
 ### query —— 提问
 用户说 `query: <问题>` 或直接问知识库里有什么。
@@ -43,7 +44,9 @@ agent_created: true
 先 health 再 lint——给空文件做语义分析纯属浪费。
 
 ### graph —— 知识图谱
-运行 `python tools/build_graph.py`，产出 `graph/graph.json` + 自包含的 `graph/graph.html`；加 `--report` 出图谱健康报告（god nodes / 幻影枢纽 / 脆弱桥）。
+运行 `python tools/build_graph.py`，产出 `graph/graph.json` + 自包含的 `graph/graph.html`；加 `--report` 出图谱健康报告（god nodes / 幻影枢纽 / 脆弱桥）。落盘前脚本会自检脚本括号配平，不通过就不写文件。
+
+> 改过渲染器（`build_graph.py` 里的 HTML 模板）后，跑一次 `node tools/check_graph_html.js` 做深度校验（真实 JS 引擎语法 + mock DOM 跑一遍加载/点击/重置）。**不要只用「零外链」判断页面能不能用**——一处漏写的 `}` 就会让整段脚本解析失败、整页白屏，而文件本身看上去完全正常。
 
 > 约定：`index.md` / `log.md` / `overview.md` 三份**导航页不作为图谱节点**（与 health / lint 的取舍保持一致）。重建会刷新产物里的 `generated` 日期，因此**每次重建 git 都会显示这两个文件被改动**（哪怕图一字未变），属正常现象。
 

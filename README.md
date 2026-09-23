@@ -76,6 +76,7 @@ statistics-data-analysis/
 │   ├── health.py                       #   结构体检
 │   ├── lint.py                         #   内容体检（确定性部分）
 │   ├── build_graph.py                  #   图谱构建
+│   ├── check_graph_html.js             #   可选：深度校验 graph.html（需 Node.js）
 │   └── README.md                       #   工具说明 & 与上游的差异
 ├── docs/                               # 进阶说明
 ├── .claude/commands/                   # 斜杠命令：wiki-ingest / query / health / lint / graph

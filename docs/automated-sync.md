@@ -33,6 +33,18 @@ REPO="$HOME/Desktop/repos/statistics-data-analysis"
 LOG="$REPO/automation.log"
 ts() { date "+%Y-%m-%d %H:%M:%S"; }
 
+# 逐步执行并记录退出码：故意不加 set -e，某步失败也继续跑完，
+# 但会在日志里留下 ⚠️ —— 否则"靠日志发现问题"只是一句空话。
+step() {
+  local label="$1"; shift
+  "$@" >> "$LOG" 2>&1
+  local rc=$?
+  if [ "$rc" -ne 0 ]; then
+    echo "[$(ts)] ⚠️ $label 退出码 $rc（详见上方输出）" >> "$LOG"
+  fi
+  return 0
+}
+
 cd "$REPO" || exit 1
 echo "[$(ts)] === 同步开始 ===" >> "$LOG"
 
@@ -40,13 +52,13 @@ echo "[$(ts)] === 同步开始 ===" >> "$LOG"
 #    例：rsync -a --include='*.md' --exclude='*' "$HOME/vault/notes/" "$REPO/raw/inbox/"
 
 # 2) 结构体检（零成本）
-python tools/health.py --save >> "$LOG" 2>&1
+step health python tools/health.py --save
 
-# 3) 内容体检（确定性部分）
-python tools/lint.py --save >> "$LOG" 2>&1
+# 3) 内容体检（确定性部分；退出码只反映真问题，💡 提示不影响）
+step lint python tools/lint.py --save
 
 # 4) 重建知识图谱
-python tools/build_graph.py >> "$LOG" 2>&1
+step graph python tools/build_graph.py
 
 echo "[$(ts)] === 同步完成 ===" >> "$LOG"
 ```

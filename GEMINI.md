@@ -59,6 +59,7 @@ tools/                   # 独立 Python 脚本（纯标准库，无需 API Key�
   health.py              #   结构完整性检查（零 LLM 调用）
   lint.py                #   结构 + 图谱质量检查（确定性部分）
   build_graph.py         #   从 [[wikilinks]] 构建知识图谱
+  check_graph_html.js    #   可选：深度校验 graph.html（需 Node.js）
 ```
 
 ---

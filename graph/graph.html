@@ -64,7 +64,7 @@ const ctx = canvas.getContext('2d');
 const wrap = document.getElementById('canvas-wrap');
 let W = 0, H = 0, DPR = 1;
 
-const nodes = GRAPH.nodes.map((n, i) => Object.assign({}, n, { x: 0, y: 0, vx: 0, vy: 0));
+const nodes = GRAPH.nodes.map(n => Object.assign({}, n, { x: 0, y: 0, vx: 0, vy: 0 }));
 const byId = new Map(nodes.map(n => [n.id, n]));
 const links = GRAPH.edges.filter(e => byId.has(e.source) && byId.has(e.target))
                          .map(e => Object.assign({}, e));

@@ -225,14 +225,37 @@ def run_checks():
     return result
 
 
+# 检查项分级：error 计入退出码；hint 只是线索 / 结构性观察，不影响退出码。
+# 理由：hint 类在健康的知识库里也会长期存在（低置信度启发式、簇间零连接这类观察），
+# 若一并计入退出码，lint 就会永远返回 1 —— 退出码失去信号意义，还会静默掐断
+# `health && lint && build_graph` 这类流水线，图谱于是再也不重建。
+SEVERITY = {
+    "orphans": "error",
+    "broken_links": "error",
+    "sparse": "error",
+    "hub_stubs": "error",
+    "phantom_hubs": "error",
+    "missing_entities": "hint",
+    "fragile_bridges": "hint",
+    "isolated_communities": "hint",
+}
+
+
+def count_by_level(r: dict):
+    """返回 (问题数, 提示数)。"""
+    err = sum(len(r.get(k, [])) for k, lv in SEVERITY.items() if lv == "error")
+    hint = sum(len(r.get(k, [])) for k, lv in SEVERITY.items() if lv == "hint")
+    return err, hint
+
+
 def render(r: dict) -> str:
     L = ["# LLM Wiki · 内容体检报告（确定性部分）", ""]
     L.append(f"> 生成日期：{r['generated']} · 扫描页面：{r['total_pages']} 个")
 
-    def block(title, items, fmt, empty="无问题"):
+    def block(title, items, fmt, empty="无问题", level="error"):
         L.append("")
         if items:
-            L.append(f"⚠️ {title}（{len(items)}）")
+            L.append(f"{'⚠️' if level == 'error' else '💡'} {title}（{len(items)}）")
             L.extend(fmt(i) for i in items)
         else:
             L.append(f"✅ {title}：{empty}")
@@ -243,7 +266,8 @@ def render(r: dict) -> str:
     block("稀疏页（出链 < 2）", r["sparse"],
           lambda i: f"- `{i['page']}` —— 出链仅 {i['outlinks']} 条")
     block("疑似缺失实体页（启发式 · 低置信度，仅作线索）", r["missing_entities"],
-          lambda i: f"- **{i['term']}** —— 出现于 {len(i['pages'])} 页：{', '.join('`'+p+'`' for p in i['pages'])}")
+          lambda i: f"- **{i['term']}** —— 出现于 {len(i['pages'])} 页：{', '.join('`'+p+'`' for p in i['pages'])}",
+          level="hint")
 
     if r.get("graph_stats"):
         s = r["graph_stats"]
@@ -253,15 +277,20 @@ def render(r: dict) -> str:
         block("Hub 存根（枢纽页却内容稀薄）", r["hub_stubs"],
               lambda i: f"- `{i['node']}` —— 度数 {i['degree']}，正文仅 {i['chars']} 字符")
         block("脆弱桥（社区间仅 1 条边）", r["fragile_bridges"],
-              lambda i: f"- 社区 {i['communities'][0]} ↔ {i['communities'][1]}：仅 1 条边")
+              lambda i: f"- 社区 {i['communities'][0]} ↔ {i['communities'][1]}：仅 1 条边",
+              level="hint")
         block("孤立社区（与外部零连接）", r["isolated_communities"],
-              lambda i: f"- 社区 {i['id']}（{i['size']} 个节点）")
+              lambda i: f"- 社区 {i['id']}（{i['size']} 个节点）",
+              level="hint")
         block("幻影枢纽（被多次引用却不存在）", r["phantom_hubs"],
               lambda i: f"- `[[{i['link']}]]` —— 被 {i['referenced_by']} 个页面引用（建页信号）")
     else:
         L.append("")
         L.append("ℹ️ 未找到 `graph/graph.json`，已跳过图谱类检查。先运行 `python tools/build_graph.py`。")
 
+    n_err, n_hint = count_by_level(r)
+    L.append("")
+    L.append(f"合计：**{n_err} 个问题** · {n_hint} 条提示　（退出码只反映问题数；💡 是线索，不必强行消除）")
     L.append("")
     L.append("---")
     L.append("说明：本报告只覆盖确定性检查。跨页面的**语义矛盾、过时摘要**需由 Agent 用读全文的方式判定。")
@@ -277,7 +306,7 @@ def main():
     r = run_checks()
     if args.save:
         out = WIKI / "lint-report.md"
-        out.write_text(render(r), encoding="utf-8")
+        out.write_text(render(r), encoding="utf-8", newline="\n")
         print(f"已写入 {out.relative_to(ROOT)}")
 
     if args.json:
@@ -285,11 +314,8 @@ def main():
     else:
         print(render(r))
 
-    total = (len(r["orphans"]) + len(r["broken_links"]) + len(r["sparse"])
-             + len(r["missing_entities"]) + len(r["hub_stubs"])
-             + len(r["fragile_bridges"]) + len(r["isolated_communities"])
-             + len(r["phantom_hubs"]))
-    return 1 if total else 0
+    errors, _ = count_by_level(r)
+    return 1 if errors else 0
 
 
 if __name__ == "__main__":

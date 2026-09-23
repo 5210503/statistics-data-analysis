@@ -180,7 +180,7 @@ def main():
     report = run_checks()
     if args.save:
         out = WIKI / "health-report.md"
-        out.write_text(render(report), encoding="utf-8")
+        out.write_text(render(report), encoding="utf-8", newline="\n")
         print(f"已写入 {out.relative_to(ROOT)}")
 
     if args.json:
