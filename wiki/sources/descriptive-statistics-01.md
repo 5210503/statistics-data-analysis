@@ -3,7 +3,7 @@ title: "第 01 讲 · 描述性统计"
 type: source
 tags: [statistics, lecture]
 date: 2026-09-03
-last_updated: 2026-09-10
+last_updated: 2026-09-23
 source_file: raw/statistics/descriptive-statistics-01.md
 ---
 
@@ -28,7 +28,8 @@ source_file: raw/statistics/descriptive-statistics-01.md
 ## 关联
 
 - [[DescriptiveStatistics]] —— 本页对应的核心概念页
-- 练习代码：`exercises/ex01_描述统计入门.py`；数据集：`data/students_scores.csv`
+- [[statistics-exercise-01]] —— 配套练习：标准库实现 + 实测结果
+- 原件：`exercises/ex01_描述统计入门.py`；数据集 `data/students_scores.csv`
 
 ## 矛盾 / 待澄清
 

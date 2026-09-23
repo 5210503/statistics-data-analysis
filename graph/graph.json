@@ -415,6 +415,11 @@
       "kind": "EXTRACTED"
     },
     {
+      "source": "descriptive-statistics-01",
+      "target": "statistics-exercise-01",
+      "kind": "EXTRACTED"
+    },
+    {
       "source": "Skill",
       "target": "llm-context-material",
       "kind": "EXTRACTED"
@@ -442,11 +447,6 @@
     {
       "source": "WorkBuddy",
       "target": "skill-material",
-      "kind": "EXTRACTED"
-    },
-    {
-      "source": "descriptive-statistics-01",
-      "target": "statistics-exercise-01",
       "kind": "EXTRACTED"
     },
     {
