@@ -19,6 +19,9 @@ allowed-tools: Read, Write, Edit, Glob, Grep, Bash
 7. 建/更新 `wiki/concepts/` 页面
 8. 标注与既有内容的矛盾
 9. 追加 `wiki/log.md`：`## [YYYY-MM-DD] ingest | <标题>`
-10. 收尾校验（无断链、索引齐全）并输出变更摘要
+10. **收尾校验（三件套不能省）**并输出变更摘要：
+    - `python tools/health.py` —— 断链、索引同步、日志覆盖
+    - `python tools/lint.py` —— 内容体检 + 图谱感知检查
+    - `python tools/build_graph.py` —— **必须重跑**，否则 `graph/` 会停留在旧状态
 
 铁律：`raw/` 只读；不得编造来源；新页面必须带 frontmatter。

@@ -105,7 +105,11 @@ last_updated: YYYY-MM-DD
 7. 为关键概念 / 框架 / 方法建或更新 `wiki/concepts/` 页面
 8. **标矛盾**：与已有内容冲突时，在受影响页面加 `## 矛盾 / 待澄清` 小节
 9. 追加 `wiki/log.md`：`## [YYYY-MM-DD] ingest | <标题>`
-10. **收尾校验**：检查有无指向不存在页面的 `[[wikilinks]]`；确认所有新页都进了 `index.md`；输出变更摘要
+10. **收尾校验（三件套不能省）**：
+    - `python tools/health.py` —— 断链、索引同步、日志覆盖
+    - `python tools/lint.py` —— 内容体检 + 图谱感知检查
+    - `python tools/build_graph.py` —— **必须重跑**，否则 `graph/` 会停留在旧状态
+    - 最后确认所有新页都进了 `index.md`，并输出变更摘要
 
 ### 来源页格式
 

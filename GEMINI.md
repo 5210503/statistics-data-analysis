@@ -93,7 +93,7 @@ last_updated: YYYY-MM-DD
 6. 建或更新相关 `entities/` 与 `concepts/` 页面
 7. **标矛盾**：冲突处加 `## 矛盾 / 待澄清`
 8. 追加 `wiki/log.md`：`## [YYYY-MM-DD] ingest | <标题>`
-9. **收尾校验**：查断链、查索引同步、输出变更摘要
+9. **收尾校验（三件套不能省）**：依次跑 `python tools/health.py`（断链/索引/日志）→ `python tools/lint.py`（内容 + 图谱感知）→ `python tools/build_graph.py`（**必须重跑，否则图谱停留在旧状态**），最后输出变更摘要
 
 ### 来源页格式
 

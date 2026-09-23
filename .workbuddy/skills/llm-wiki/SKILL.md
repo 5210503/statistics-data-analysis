@@ -25,7 +25,10 @@ agent_created: true
 
 ### ingest —— 吸收新资料
 用户说 `ingest raw/xxx.md`、「把这份资料吸收进知识库」。
-按 CLAUDE.md「Ingest 工作流」10 步执行：读源文件 → 读 index/overview → 写 `wiki/sources/<slug>.md` → 更新 `index.md` → 修订 `overview.md` → 建/更新 entities 与 concepts 页面 → 标矛盾 → 追加 `log.md` → 收尾校验并汇报变更。
+按 CLAUDE.md「Ingest 工作流」10 步执行：读源文件 → 读 index/overview → 写 `wiki/sources/<slug>.md` → 更新 `index.md` → 修订 `overview.md` → 建/更新 entities 与 concepts 页面 → 标矛盾 → 追加 `log.md` → **收尾必跑三件套**并汇报变更。
+
+> ⚠️ **收尾三件套不能省**：`python tools/health.py`（断链 / 索引 / 日志）→ `python tools/lint.py`（内容）→ `python tools/build_graph.py`。
+> **尤其别忘重跑图谱**——否则 `graph/` 会停留在旧状态，与实际 wiki 不一致。
 
 ### query —— 提问
 用户说 `query: <问题>` 或直接问知识库里有什么。
@@ -35,10 +38,14 @@ agent_created: true
 运行 `python tools/health.py`。检查空文件、索引同步、日志覆盖。**不调用 LLM**，可随时跑。
 
 ### lint —— 内容体检
-用 Grep/Read 找孤立页、断链、矛盾、过时摘要、缺失实体页、数据缺口。先 health 再 lint。
+**先跑确定性部分**：`python tools/lint.py`（零 LLM 调用）——孤立页、断链、稀疏页（<2 出链）、缺失实体页启发式，以及图谱感知检查（Hub 存根 / 脆弱桥 / 孤立社区 / 幻影枢纽）。
+**再用 Grep/Read 查语义部分**（脚本查不了的）：跨页面**矛盾**、**过时摘要**、**数据缺口**。
+先 health 再 lint——给空文件做语义分析纯属浪费。
 
 ### graph —— 知识图谱
-运行 `python tools/build_graph.py`，产出 `graph/graph.json` + 自包含的 `graph/graph.html`。
+运行 `python tools/build_graph.py`，产出 `graph/graph.json` + 自包含的 `graph/graph.html`；加 `--report` 出图谱健康报告（god nodes / 幻影枢纽 / 脆弱桥）。
+
+> 约定：`index.md` / `log.md` / `overview.md` 三份**导航页不作为图谱节点**（与 health / lint 的取舍保持一致）。重建会刷新产物里的 `generated` 日期，因此**每次重建 git 都会显示这两个文件被改动**（哪怕图一字未变），属正常现象。
 
 ## 3. 红线（违反即失败）
 
