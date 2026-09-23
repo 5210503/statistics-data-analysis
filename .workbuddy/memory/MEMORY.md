@@ -27,3 +27,5 @@
 - **命名约定**：概念/实体页 TitleCase（`Skill.md`、`Anthropic.md`），来源页 kebab-case 且带语义后缀（`skill-material.md`），避免 Obsidian 大小写不敏感造成的同名冲突。
 - **素材区**：`learning-materials/`（concept-material-generator 输出）、`notes/`、`exercises/`、`data/` 不属于三层架构；其内容需先复制进 `raw/` 再 ingest。
 - 已知问题：Markdown 表格内不要用转义的 wikilink（`[[X\|Y]]` 会断链）。
+- **已知行为（不是 bug）**：`build_graph.py` 每次运行都会刷新 `graph.json` / `graph.html` 里的 `generated` 日期字段，因此**只要重建，`git status` 就必然显示这两个文件被修改**，哪怕图谱内容一字未变。属正常现象，按需提交即可，不要误判为"有东西被改坏"。
+- **比对文件清单的正确姿势**：别用裸 `git ls-files` 和 `find` 做 `comm`——前者对中文路径输出八进制转义，会把已入库文件误判为未入库。用 `git -c core.quotepath=false ls-files`，两侧统一 `LC_ALL=C sort`。
