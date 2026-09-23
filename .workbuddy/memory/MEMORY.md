@@ -7,7 +7,13 @@
 
 ## Git 远程推送
 - **远程仓库**：origin = `https://gh-proxy.com/https://github.com/5210503/statistics-data-analysis.git`（gh-proxy 代理，本机直连 github.com 不通）。gh-proxy 偶发 502，重试即可。
-- **认证**：Windows 凭据管理器已存有效 PAT（host=gh-proxy.com，用户名 5210503，2026-09-07 更新）。WorkBuddy 环境里 GCM 无法弹交互登录窗，凭据失效时需用户提供 PAT，用 `https://用户名:token@gh-proxy.com/...` 一次性推送，再 `git credential approve` 存回凭据管理器。
+- **认证（2026-09-23 重写，务必按此做）**：Windows 凭据管理器已存有效 PAT（host=gh-proxy.com，用户名 5210503，`ghp_` 开头 40 位）。**但本机 GCM 在 push 环节会静默挂起**——直接 `git push origin main` 会卡死、无任何输出（实测 3 分钟被超时掐断），而 `git credential fill` 取凭据本身是正常的，**故障点只在 GCM 的 push 认证交互**。可靠做法：先用 `git credential fill` 取出 PAT，再内嵌 URL 且显式禁用 helper：
+  ```bash
+  TOKEN=$(printf "protocol=https\nhost=gh-proxy.com\n" | git credential fill | grep '^password=' | sed 's/^password=//')
+  git -c credential.helper= push "https://5210503:${TOKEN}@gh-proxy.com/https://github.com/5210503/statistics-data-analysis.git" main --verbose --progress
+  rm -f <存放 token 的临时文件>   # 用完必须清理
+  ```
+  实测 **12 秒**完成 88 KiB 推送。另：`git-upload-pack`（下载）握手约 1.3s，`git-receive-pack`（上传）约 7s——上传通道明显慢，但通。
 - **已知怪癖**：git 在本机更新 `.git/refs/remotes/origin/*` 跟踪引用会静默失败（update-ref 返回成功但值不变）；推送/拉取成功后若 `git status` 仍显示 ahead，手动创建 `.git/refs/remotes/origin/<分支>` 文件写入远程最新 commit hash 即可。
 - **.workbuddy/ 已入库**：用户 2026-09-07 明确选择连 同 .workbuddy/（记忆+skill）一起推送到远程，后续推送保持包含。
 
