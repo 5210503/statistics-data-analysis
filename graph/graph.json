@@ -2,8 +2,8 @@
   "generated": "2026-09-23",
   "stats": {
     "pages": 17,
-    "extracted_edges": 66,
-    "inferred_edges": 26,
+    "extracted_edges": 60,
+    "inferred_edges": 22,
     "communities": 2
   },
   "nodes": [
@@ -14,7 +14,7 @@
       "type": "concept",
       "group": 0,
       "color": "#4285f4",
-      "degree": 14,
+      "degree": 13,
       "file": "wiki/concepts/AgentSkill.md"
     },
     {
@@ -24,7 +24,7 @@
       "type": "concept",
       "group": 0,
       "color": "#4285f4",
-      "degree": 13,
+      "degree": 12,
       "file": "wiki/concepts/ContextEngineering.md"
     },
     {
@@ -54,7 +54,7 @@
       "type": "concept",
       "group": 0,
       "color": "#4285f4",
-      "degree": 9,
+      "degree": 6,
       "file": "wiki/concepts/MCP.md"
     },
     {
@@ -64,7 +64,7 @@
       "type": "concept",
       "group": 0,
       "color": "#4285f4",
-      "degree": 14,
+      "degree": 13,
       "file": "wiki/concepts/ProgressiveDisclosure.md"
     },
     {
@@ -74,7 +74,7 @@
       "type": "concept",
       "group": 0,
       "color": "#4285f4",
-      "degree": 14,
+      "degree": 13,
       "file": "wiki/concepts/Skill.md"
     },
     {
@@ -94,7 +94,7 @@
       "type": "entity",
       "group": 0,
       "color": "#4285f4",
-      "degree": 11,
+      "degree": 10,
       "file": "wiki/entities/ConceptMaterialGenerator.md"
     },
     {
@@ -106,16 +106,6 @@
       "color": "#4285f4",
       "degree": 12,
       "file": "wiki/entities/WorkBuddy.md"
-    },
-    {
-      "id": "overview",
-      "label": "overview",
-      "title": "overview",
-      "type": "overview",
-      "group": 0,
-      "color": "#4285f4",
-      "degree": 12,
-      "file": "wiki/overview.md"
     },
     {
       "id": "agent-skill-material",
@@ -134,7 +124,7 @@
       "type": "source",
       "group": 0,
       "color": "#4285f4",
-      "degree": 13,
+      "degree": 12,
       "file": "wiki/sources/concept-relationship-summary.md"
     },
     {
@@ -144,7 +134,7 @@
       "type": "source",
       "group": 1,
       "color": "#ea4335",
-      "degree": 1,
+      "degree": 2,
       "file": "wiki/sources/descriptive-statistics-01.md"
     },
     {
@@ -154,7 +144,7 @@
       "type": "source",
       "group": 0,
       "color": "#4285f4",
-      "degree": 11,
+      "degree": 10,
       "file": "wiki/sources/llm-context-material.md"
     },
     {
@@ -164,8 +154,18 @@
       "type": "source",
       "group": 0,
       "color": "#4285f4",
-      "degree": 10,
+      "degree": 11,
       "file": "wiki/sources/skill-material.md"
+    },
+    {
+      "id": "statistics-exercise-01",
+      "label": "statistics-exercise-01",
+      "title": "练习 01 · 描述性统计（Python 标准库实现）",
+      "type": "source",
+      "group": 1,
+      "color": "#ea4335",
+      "degree": 2,
+      "file": "wiki/sources/statistics-exercise-01.md"
     },
     {
       "id": "agent-context-skill-relationship",
@@ -174,7 +174,7 @@
       "type": "synthesis",
       "group": 0,
       "color": "#4285f4",
-      "degree": 14,
+      "degree": 12,
       "file": "wiki/syntheses/agent-context-skill-relationship.md"
     }
   ],
@@ -252,6 +252,11 @@
     {
       "source": "AgentSkill",
       "target": "ContextEngineering",
+      "kind": "EXTRACTED"
+    },
+    {
+      "source": "DescriptiveStatistics",
+      "target": "statistics-exercise-01",
       "kind": "EXTRACTED"
     },
     {
@@ -390,46 +395,6 @@
       "kind": "EXTRACTED"
     },
     {
-      "source": "LLMContext",
-      "target": "overview",
-      "kind": "EXTRACTED"
-    },
-    {
-      "source": "ContextEngineering",
-      "target": "overview",
-      "kind": "EXTRACTED"
-    },
-    {
-      "source": "Skill",
-      "target": "overview",
-      "kind": "EXTRACTED"
-    },
-    {
-      "source": "AgentSkill",
-      "target": "overview",
-      "kind": "EXTRACTED"
-    },
-    {
-      "source": "ProgressiveDisclosure",
-      "target": "overview",
-      "kind": "EXTRACTED"
-    },
-    {
-      "source": "MCP",
-      "target": "overview",
-      "kind": "EXTRACTED"
-    },
-    {
-      "source": "agent-context-skill-relationship",
-      "target": "overview",
-      "kind": "EXTRACTED"
-    },
-    {
-      "source": "DescriptiveStatistics",
-      "target": "overview",
-      "kind": "EXTRACTED"
-    },
-    {
       "source": "Anthropic",
       "target": "agent-skill-material",
       "kind": "EXTRACTED"
@@ -480,6 +445,11 @@
       "kind": "EXTRACTED"
     },
     {
+      "source": "descriptive-statistics-01",
+      "target": "statistics-exercise-01",
+      "kind": "EXTRACTED"
+    },
+    {
       "source": "LLMContext",
       "target": "agent-context-skill-relationship",
       "kind": "EXTRACTED"
@@ -510,58 +480,52 @@
       "kind": "EXTRACTED"
     },
     {
-      "source": "ContextEngineering",
-      "target": "MCP",
-      "kind": "INFERRED",
-      "confidence": 0.28
-    },
-    {
       "source": "ConceptMaterialGenerator",
       "target": "ContextEngineering",
       "kind": "INFERRED",
-      "confidence": 0.33
+      "confidence": 0.35
     },
     {
       "source": "ContextEngineering",
       "target": "WorkBuddy",
       "kind": "INFERRED",
-      "confidence": 0.26
+      "confidence": 0.28
     },
     {
       "source": "ContextEngineering",
       "target": "agent-skill-material",
       "kind": "INFERRED",
+      "confidence": 0.29
+    },
+    {
+      "source": "ContextEngineering",
+      "target": "skill-material",
+      "kind": "INFERRED",
       "confidence": 0.27
+    },
+    {
+      "source": "Anthropic",
+      "target": "LLMContext",
+      "kind": "INFERRED",
+      "confidence": 0.25
     },
     {
       "source": "MCP",
       "target": "ProgressiveDisclosure",
       "kind": "INFERRED",
-      "confidence": 0.28
+      "confidence": 0.25
     },
     {
       "source": "MCP",
       "target": "skill-material",
       "kind": "INFERRED",
-      "confidence": 0.26
-    },
-    {
-      "source": "MCP",
-      "target": "agent-context-skill-relationship",
-      "kind": "INFERRED",
-      "confidence": 0.27
+      "confidence": 0.28
     },
     {
       "source": "Anthropic",
       "target": "WorkBuddy",
       "kind": "INFERRED",
       "confidence": 0.26
-    },
-    {
-      "source": "Anthropic",
-      "target": "overview",
-      "kind": "INFERRED",
-      "confidence": 0.3
     },
     {
       "source": "Anthropic",
@@ -573,13 +537,7 @@
       "source": "Anthropic",
       "target": "agent-context-skill-relationship",
       "kind": "INFERRED",
-      "confidence": 0.3
-    },
-    {
-      "source": "ConceptMaterialGenerator",
-      "target": "overview",
-      "kind": "INFERRED",
-      "confidence": 0.3
+      "confidence": 0.32
     },
     {
       "source": "ConceptMaterialGenerator",
@@ -615,19 +573,7 @@
       "source": "WorkBuddy",
       "target": "agent-context-skill-relationship",
       "kind": "INFERRED",
-      "confidence": 0.42
-    },
-    {
-      "source": "concept-relationship-summary",
-      "target": "overview",
-      "kind": "INFERRED",
-      "confidence": 0.4
-    },
-    {
-      "source": "llm-context-material",
-      "target": "overview",
-      "kind": "INFERRED",
-      "confidence": 0.3
+      "confidence": 0.46
     },
     {
       "source": "agent-skill-material",
@@ -645,7 +591,7 @@
       "source": "agent-context-skill-relationship",
       "target": "agent-skill-material",
       "kind": "INFERRED",
-      "confidence": 0.32
+      "confidence": 0.34
     },
     {
       "source": "concept-relationship-summary",
@@ -657,19 +603,19 @@
       "source": "agent-context-skill-relationship",
       "target": "llm-context-material",
       "kind": "INFERRED",
-      "confidence": 0.46
+      "confidence": 0.51
     },
     {
       "source": "agent-context-skill-relationship",
       "target": "skill-material",
       "kind": "INFERRED",
-      "confidence": 0.46
+      "confidence": 0.49
     }
   ],
   "communities": [
     {
       "id": 0,
-      "size": 15,
+      "size": 14,
       "members": [
         "AgentSkill",
         "ContextEngineering",
@@ -680,7 +626,6 @@
         "Anthropic",
         "ConceptMaterialGenerator",
         "WorkBuddy",
-        "overview",
         "agent-skill-material",
         "concept-relationship-summary",
         "llm-context-material",
@@ -691,10 +636,11 @@
     },
     {
       "id": 1,
-      "size": 2,
+      "size": 3,
       "members": [
         "DescriptiveStatistics",
-        "descriptive-statistics-01"
+        "descriptive-statistics-01",
+        "statistics-exercise-01"
       ],
       "color": "#ea4335"
     }
@@ -702,23 +648,23 @@
   "top_nodes": [
     {
       "id": "AgentSkill",
-      "degree": 14
+      "degree": 13
     },
     {
       "id": "ProgressiveDisclosure",
-      "degree": 14
+      "degree": 13
     },
     {
       "id": "Skill",
-      "degree": 14
-    },
-    {
-      "id": "agent-context-skill-relationship",
-      "degree": 14
+      "degree": 13
     },
     {
       "id": "ContextEngineering",
-      "degree": 13
+      "degree": 12
+    },
+    {
+      "id": "WorkBuddy",
+      "degree": 12
     }
   ],
   "broken_links": []

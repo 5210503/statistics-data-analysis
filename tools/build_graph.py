@@ -29,7 +29,11 @@ GRAPH_DIR = ROOT / "graph"
 
 FM_RE = re.compile(r"^\ufeff?\s*---[ \t]*\r?\n(.*?)\r?\n---[ \t]*\r?\n?", re.DOTALL)
 WIKILINK_RE = re.compile(r"\[\[([^\]|]+)(?:\|[^\]]*)?\]\]")
-SKIP = {"index.md", "log.md", "health-report.md", "lint-report.md"}
+# 导航/元文件：不是知识节点，不参与图谱。
+# index / log / overview 是 schema 里并列的三份「AI 维护的导航文件」，
+# 三者都排除——与 health.py / lint.py 保持一致。
+# （overview 若被当作节点，会因其链向几乎所有页面而制造出虚假的枢纽与跨簇桥梁。）
+SKIP = {"index.md", "log.md", "overview.md", "health-report.md", "lint-report.md"}
 GENERIC_TAGS = {"ai-concept", "synthesis"}  # 过于宽泛，不作为推断依据
 
 PALETTE = ["#4285f4", "#ea4335", "#34a853", "#f9ab00",

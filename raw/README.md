@@ -18,12 +18,14 @@ raw/
 │   ├── skill.md                     #   Skill 通用概念
 │   └── concept-relationship.md      #   Agent / 上下文 / Skill 三者关系
 └── statistics/                      # 统计与数据分析原始文档
-    └── descriptive-statistics-01.md #   第 01 讲 · 描述性统计
+    ├── descriptive-statistics-01.md #   第 01 讲 · 描述性统计
+    ├── statistics-exercise-01.py    #   练习 01 · 描述性统计（Python 标准库实现）
+    └── students-scores.csv          #   配套数据集（20 名学生 × 三科成绩 + 学习时长）
 ```
 
 ## 这些文件的来源
 
-`raw/ai-concepts/` 下的四份是**副本**，原件在仓库的素材区：
+`raw/` 下的文件都是**副本**，原件在仓库的素材区：
 
 | raw/ 副本 | 原件位置 |
 |---|---|
@@ -32,5 +34,7 @@ raw/
 | `ai-concepts/skill.md` | `learning-materials/Skill.md` |
 | `ai-concepts/concept-relationship.md` | `concept-relationship.md` |
 | `statistics/descriptive-statistics-01.md` | `notes/第01讲-描述性统计.md` |
+| `statistics/statistics-exercise-01.py` | `exercises/ex01_描述统计入门.py` |
+| `statistics/students-scores.csv` | `data/students_scores.csv` |
 
 > 原件仍由人（及 concept-material-generator Skill）维护；`raw/` 保存的是被 ingest 时的**冻结快照**，用于保证 wiki 页面引用的出处稳定可追溯。原件更新后，重新复制进 `raw/` 并再次 ingest 即可。

@@ -2,8 +2,8 @@
 title: "描述性统计（Descriptive Statistics）"
 type: concept
 tags: [statistics, descriptive]
-sources: [descriptive-statistics-01]
-last_updated: 2026-09-10
+sources: [descriptive-statistics-01, statistics-exercise-01]
+last_updated: 2026-09-23
 ---
 
 ## 定义
@@ -38,13 +38,28 @@ last_updated: 2026-09-10
 
 ## 待解问题
 
-1. 方差分母为何有时是 n、有时是 n−1？（下一讲「抽样」揭晓）
-2. 全班成绩同时加 10 分，标准差会变吗？（不变）
+1. 方差分母为何有时是 n、有时是 n−1？（下一讲「抽样」揭晓；第 01 讲的练习用的是**样本口径 n−1**）
+2. ~~全班成绩同时加 10 分，标准差会变吗？~~ **已验证：不变** —— 见 [[statistics-exercise-01]]，数学加 10 分前后标准差均为 11.82。
+
+## 实例（本仓库数据集实测）
+
+用 `students_scores` 数据集（20 名学生 × 数学 / 语文 / 英语）实测：
+
+| 科目 | 均值 | 中位数 | 标准差 |
+|---|---|---|---|
+| 数学 | 78.65 | 81.50 | 11.82 |
+| 语文 | 79.05 | 81.00 | 11.39 |
+| 英语 | 79.55 | 81.00 | 12.53 |
+
+两点可直接观察到的现象：
+
+1. **均值 < 中位数**（三科皆然）→ 分布呈**左偏**，低分侧拖尾更长。这是一条实用的偏度判读经验：均值被拉向长尾一侧。
+2. **平移不变性**：标准差只度量离散程度，与数据整体位置无关。
 
 ## 相关来源
 
 - [[descriptive-statistics-01]] —— 第 01 讲笔记
-- 练习：`exercises/ex01_描述统计入门.py`；数据：`data/students_scores.csv`
+- [[statistics-exercise-01]] —— 配套练习：标准库实现 + 实测结果
 
 ## 相关页面
 

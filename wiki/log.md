@@ -50,3 +50,18 @@ grep "^## \[" wiki/log.md | tail -10
 
 ## [2026-09-10] health | 结构体检
 - 运行 `tools/health.py`：检查空文件、索引同步、日志覆盖
+
+## [2026-09-23] ingest | 练习 01 · 描述性统计（Python 标准库实现）
+- 新增来源页 `sources/statistics-exercise-01.md`
+- 更新概念页 `concepts/DescriptiveStatistics.md`（补实测数据、左偏判读与平移不变性验证，关闭遗留问题 2）
+- 一手来源：raw/statistics/statistics-exercise-01.py（原件 exercises/ex01_描述统计入门.py）
+- 配套数据集：raw/statistics/students-scores.csv（原件 data/students_scores.csv）
+
+## [2026-09-23] graph | 修正 overview 误入图谱
+- `build_graph.py` 的排除集补上 `overview.md`，与 health.py / lint.py 对齐（节点数 18 → 17）
+- 结果：17 节点 / 82 边（确定 60 / 推断 22）/ 2 社区
+- **重要发现**：两个社区**零连接**。此前 lint 报的「脆弱桥（社区间仅 1 条边）」实为 overview 被当作节点所制造的假象——那条边两端都是 overview。
+
+## [2026-09-23] health | 结构体检 + 内容体检
+- `health.py`：扫描 17 页，**0 问题**
+- `lint.py`：稀疏页由 2 条降为 1 条（`concepts/DescriptiveStatistics.md` 已修复，仅剩 `sources/descriptive-statistics-01.md`）；图谱感知部分改报「孤立社区 ×2」

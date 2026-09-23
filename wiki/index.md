@@ -12,6 +12,7 @@
 - [Skill（通用概念）](sources/skill-material.md) — 可复用任务能力模板的四层结构
 - [Agent / 上下文 / Skill 三者关系](sources/concept-relationship-summary.md) — 横向总结：上下文决定当下表现，Skill 决定长期复利
 - [第 01 讲 · 描述性统计](sources/descriptive-statistics-01.md) — 集中趋势、离散程度、分布形态与 Python 上手
+- [练习 01 · 描述性统计（Python 标准库实现）](sources/statistics-exercise-01.md) — 标准库算三科统计量，实测验证标准差的平移不变性
 
 ## Entities
 - [Anthropic](entities/Anthropic.md) — Agent Skills 格式与开放标准的提出方

@@ -26,6 +26,8 @@
 - **硬约束（改动知识库时必须遵守）**：① `raw/` 只读，永不修改删除；② 禁止编造来源与链接，不确定就写「待核实」；③ 新页面必须带 YAML frontmatter + 登记 `wiki/index.md` + 追加 `wiki/log.md`；④ wikilink 必须指向真实存在的页面。
 - **命名约定**：概念/实体页 TitleCase（`Skill.md`、`Anthropic.md`），来源页 kebab-case 且带语义后缀（`skill-material.md`），避免 Obsidian 大小写不敏感造成的同名冲突。
 - **素材区**：`learning-materials/`（concept-material-generator 输出）、`notes/`、`exercises/`、`data/` 不属于三层架构；其内容需先复制进 `raw/` 再 ingest。
+- **导航页约定（三个工具必须一致）**：`index.md` / `log.md` / `overview.md` 在 health / lint / build_graph 中**一律排除**——不计页数、不作图谱节点。2026-09-23 修复了 `build_graph.py` 漏排 `overview.md` 的 bug：overview 链向几乎所有页面，一旦当节点就会制造**虚假枢纽与虚假跨桥**（当时那条唯一的跨簇「桥」两端都是 overview）。
+- **两条主线尚未连通（图谱实测）**：AI 概念簇（14 节点）与统计簇（3 节点）**零 wikilink 连接**。正规的「桥」是写 `syntheses/` 综合页，导航页不算桥；建议等统计线再厚一些（第 02 讲后）再写。
 - 已知问题：Markdown 表格内不要用转义的 wikilink（`[[X\|Y]]` 会断链）。
 - **已知行为（不是 bug）**：`build_graph.py` 每次运行都会刷新 `graph.json` / `graph.html` 里的 `generated` 日期字段，因此**只要重建，`git status` 就必然显示这两个文件被修改**，哪怕图谱内容一字未变。属正常现象，按需提交即可，不要误判为"有东西被改坏"。
 - **比对文件清单的正确姿势**：别用裸 `git ls-files` 和 `find` 做 `comm`——前者对中文路径输出八进制转义，会把已入库文件误判为未入库。用 `git -c core.quotepath=false ls-files`，两侧统一 `LC_ALL=C sort`。
